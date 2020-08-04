@@ -90,22 +90,42 @@
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
-      inventors.sort((date1, date2) => {
-        return date1.year > date2.year;
+      let inOrder = inventors.sort((date1, date2) => {
+        return date1.year > date2.year ? 1 : -1;
       });
-      console.log(inventors);
+      console.log(inOrder);
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
 
-      // 5. Sort the inventors by years lived
+      let together = inventors.reduce((acc, cv) => {
+        return acc + (cv.passed - cv.year);
+      }, 0);
+      console.log(together);
 
+      // 5. Sort the inventors by years lived
+      let yearsLived = inventors.sort((a, b) => {
+        return a.passed - a.year > b.passed - b.year ? 1 : -1;
+      });
+
+      console.log(yearsLived);
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+      // const boulewards = document.querySelector(".mw-category");
+      // const links = Array.from(boulewards.querySelectorAll("a"));
+      // const de = links
+      //   .map((link) => link.textContent)
+      //   .filter((streetName) => streetName.includes("de"));
+
       // 7. sort Exercise
       // Sort the people alphabetically by last name
-
+      const order = people.sort((a, b) => {
+        const [aLastName, aFirstName] = a.split(", ");
+        const [bLastName, bFirstName] = b.split(", ");
+        return aLastName > bLastName ? 1 : -1;
+      });
+      console.log(order);
       // 8. Reduce Exercise
       // Sum up the instances of each of these
       const data = [
@@ -124,6 +144,18 @@
         "car",
         "truck",
       ];
+
+      let sum = data.reduce((acc, cv) => {
+        if (!acc[cv]) {
+          acc[cv] = 0;
+        }
+
+        acc[cv]++;
+
+        return acc;
+      }, {});
+
+      console.log(sum);
     </script>
   </body>
 </html>
